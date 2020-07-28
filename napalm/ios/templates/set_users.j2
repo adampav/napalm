@@ -1,0 +1,18 @@
+{%- for user_name, user_details in users.items() %}
+{%- if user_details.get('password') %}
+username {{user_name}} secret 5 {{user_details.password}}
+{%- endif %}
+{%- if user_details.get('level') %}
+username {{user_name}} privilege {{user_level}}
+{%- endif %}
+{%- if user_details.get('sshkeys') %}
+ip ssh pubkey-chain
+     username {{user_name}}
+     {%- for sshkey in user_details.sshkeys %}
+          key-hash {{sshkey}}
+          exit
+    {%- endfor %}
+     exit
+exit
+{%- endif %}
+{%- endfor %}

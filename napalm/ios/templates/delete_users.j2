@@ -1,0 +1,13 @@
+{%- for user_name, user_details in users.items() %}
+{%- if user_details.get('sshkeys') %}
+ip ssh pubkey-chain
+     username {{user_name}}
+     {%- for sshkey in user_details.sshkeys %}
+          no key-hash {{sshkey}}
+          exit
+    {%- endfor %}
+     exit
+exit
+{%- endif %}
+no username {{user_name}}
+{%- endfor %}

@@ -2215,7 +2215,7 @@ class IOSXRDriver(NetworkDriver):
                 user_entry, "UsergroupsUnderUsername/UsergroupUnderUsername/Naming/Name"
             )
             level = _CISCO_GROUP_TO_CISCO_PRIVILEGE_MAP.get(group, 0)
-            password = napalm.base.helpers.find_txt(user_entry, "Password/Password")
+            password = napalm.base.helpers.find_txt(user_entry, "Secret/Password")
             user_details = _DEFAULT_USER_DETAILS.copy()
             user_details.update(
                 {"level": level, "password": py23_compat.text_type(password)}
